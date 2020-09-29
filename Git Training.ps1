@@ -45,7 +45,7 @@ git help -a
 git help cat-file
 git --help cat-file
 
-# Displays information on objcts whose SHA1 values are passed in
+# Displays information on objects whose SHA1 values are passed in
 # Can limit by $blobType if passed, e.g. commit|tree|blob
 
 function displayObjects ($blobType = "")
@@ -102,9 +102,6 @@ function getSHA1s()
             $firstTwo = $f.Name.Substring(0,2)
             $listOfSHA1s = $listOfSHA1s + ($fld + $firstTwo)   
         }
-        #$firstTwo = get-childitem -Path $objects\$fld | % { $_.Name.Substring(0,2) }
-        #$listOfSHA1s = $listOfSHA1s + ($fld + $firstTwo)
-       #$listOfSHA1s.Add($fld + "xx")
     }
 
     # Return array.  See the ","
@@ -186,7 +183,7 @@ function whatsUpGit($blobType = "")
 
   #  getSHA1s
 
-    delimitmsg "displayObjects (getSHA1s)"
+    delimitmsg "displayObjects $blobType"
 
     displayObjects $blobType
 }
@@ -362,7 +359,7 @@ git commit -m "First Commit"
 whatsUpGitLong
 
 # Ok, a lot just happened.  Let's see if we can understand it
-# Using our knowledge of objec types
+# Using our knowledge of object types
 
 displayObjects commit
 displayObjects tree
@@ -392,15 +389,17 @@ git checkout SecondUpdate
 showWorkingArea
 
 copy-item -Path .\recipies.txt -Destination ..\NewGitRepo -Force
-copy-item -Path .\Breakfast -Destination ..\NewGitRepo -Recurse -Force
-copy-item -Path .\Lunch -Destination ..\NewGitRepo -Recurse -Force
-copy-item -Path .\Dinner -Destination ..\NewGitRepo -Recurse -Force
+
 cd $TrainingRootFolder\NewGitRepo
 
 git add .
 git commit -m "Update recipies.txt"
 
 whatsUpGit
+
+displayObjects commit
+displayObjects tree
+displayObjects blob
 
 <#*********************************************************************************
     Git102
@@ -430,4 +429,11 @@ git clone $AjayGitHub/AjayGitHub.git
 # Purple Team
 
 git clone $ChristopherGitHub/PurpleTeam.git
+
+# Push to a (empty) Remote Repository
+
+git remote add origin https://github.com/chrhodes/GitTraining.git
+
+git remote -v
+
 
