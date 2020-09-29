@@ -27,7 +27,7 @@ $RohiniGitHub = "https://github.com/RohiniSharma11"
 
 # Purple Team
 
-$ChristopheGitHub = "https://github.com/chrhodes/PurpleTeam.git"
+$ChristopherGitHub = "https://github.com/chrhodes"
 
 #endregion
 
@@ -240,6 +240,8 @@ function delimitmsg($msg)
 
 #endregion
 
+#region Git 101
+
 ################################################################
 # Git 101
 ################################################################
@@ -263,6 +265,8 @@ git help -a
 #NB - Be really careful as git help command launches browser and locks folder 
 
 #endregion
+
+#region Dip Our Toe in the Water
 
 # create a new empty repository
 
@@ -301,6 +305,10 @@ git Log
 # Do this (lowercase)
 
 git log
+
+#endregion
+
+#region Optional Extra Credit - But let's do it anyway
 
 <#********************************************************************
 This is an Optional Extra Credit Section that should only be done
@@ -349,6 +357,8 @@ whatsUpGitLong
 <#********************************************************************
 End Optional Extra Credit Section
 **********************************************************************#>
+
+#endregion
 
 # Ok, lets pretend we didn't do any of that
 # Start Clean
@@ -483,34 +493,40 @@ displayObjects commit
 displayObjects tree
 displayObjects blob
 
+#endregion
+
+#region Git 102
+
 <#*********************************************************************************
     Git102
 *********************************************************************************#>
 
 # Clone a remote repository
 
+# NB. If this doesn't work, check that you are using the VPN
+
 cd $TrainingRootFolder
 
 # Red Team
 
-git clone $VikramjeetGitHub/VikramJeetRedTeam.git
-git clone $KrishanGitHub/KrishanRedTeam.git
+git clone $VikramjeetGitHub/RedTeam.git RedTeam_Vikramjeet
+git clone $KrishanGitHub/RedTeam.git RedTeam_Krishan
 
 # Green Team
 
-git clone $GyanGitHub/GyanGreenTeam.git
-git clone $PushpGitHub/PushpGreenTeam.git
+git clone $GyanGitHub/GreenTeam.git GreenTeam_Gyan
+git clone $PushpGitHub/GreenTeam.git GreenTeam_Pushp
 
 
 # Blue Team
 
-git clone $RohiniGitHub/RohiniGitHub.git
-git clone $AjayGitHub/AjayGitHub.git
+git clone $RohiniGitHub/BlueTeam.git BlueTeam_Rohini
+git clone $AjayGitHub/BlueTeam.git BlueTeam_Ajay
 
 
 # Purple Team
 
-git clone $ChristopherGitHub/PurpleTeam.git
+git clone $ChristopherGitHub/PurpleTeam.git PurpleTeam_Christopher
 
 # Push to a (empty) Remote Repository
 
@@ -518,15 +534,22 @@ git remote add origin https://github.com/chrhodes/GitTraining.git
 
 git remote -v
 
+# Get the GitTraining Repo
+# You will start using this to create a mess
+
+git clone $ChristopheGitHub/GitTraining.git
 
 <#*********************************************************************************
-    Hackinng Around to greate Branches in GitTraining
+    Hacking Around to greate Branches in GitTraining
+    To start each team out with something to use.
 *********************************************************************************#>
 
+# Remember case matters
 
 git Branch
 git branch
 
+# Create some branches
 
 git branch RedTeam
 
@@ -536,16 +559,58 @@ git branch BlueTeam
 
 git branch PurpleTeam
 
+# Checkout the Purple Team
+# Sets Index and Working Area to LocalRepository PurpleTeam
+
 git checkout PurpleTeam
 
 n++ recipies.txt
+n++ README.txt
 
 mkdir Breakfast
+n++ README.txt
 mkdir Lunch
+# Copy README.txt from Breakfast
 mkdir Dinner
+# Copy README.txt from Breakfast
+
+
 git commit -a -m "Staring Files and Folders"
+
+# Push changes to Remote Origin PurpleTeam Branch
+
 git push
+
 git remote
 git remote -v
+
+# Checkout each team and
+# cherry-pick the changes from the PurpleTeam Commit
+
+git checkout RedTeam
+
+git cherry-pick f0f6
+
+git checkout BlueTeam
+
+git cherry-pick f0f6
+
+git checkout GreenTeam
+
+git cherry-pick f0f6
+
+# Show TortiseGit UI
+# Show SourceTree UI
+
+
+#endregion
+
+#region Git 103
+
+<#*********************************************************************************
+    Git102
+*********************************************************************************#>
+
+#endregion
 
 
