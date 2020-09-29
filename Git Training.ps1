@@ -1,8 +1,12 @@
-﻿# BD Jedi Order Git Training
+﻿################################################################
+# BD Jedi Order Git Training
+################################################################
+
+################################################################
+# Configure Information that may differ by each person's machine
+################################################################
 
 #region Configuration
-
-# Configure Information that may differ by each person's machine
 
 $TrainingRootFolder = "C:\Training\Git"
 
@@ -19,7 +23,7 @@ $PushpGitHub = "https://github.com/pushpgaurav28"
 # Blue Team
 
 $AjayGitHub = "https://github.com/stridersol"
-$RohiniGitHub = "https://github.com/???"
+$RohiniGitHub = "https://github.com/RohiniSharma11"
 
 # Purple Team
 
@@ -27,17 +31,34 @@ $ChristopheGitHub = "https://github.com/chrhodes/PurpleTeam.git"
 
 #endregion
 
-#region Help
 
-git help
-git help -g
-git help -a
-#git help <command>
-#git help <command> -v
 
-#endregion
+################################################################
+# NB.  Need to load these functions before starting to work.
+################################################################
 
 #region functions
+
+# Displays content of .Git folder - The Git Repository!
+
+function displayGitRepo()
+{
+    $objects = ".\.git"
+
+    $objectFolders = get-childitem -Path $objects
+
+    $objectFolders
+
+    foreach ($fld in $objectFolders)
+    {
+        get-childitem -Path $objects\$fld -Recurse
+    }
+}
+
+function displayWorkingArea()
+{
+    get-childitem -Exclude .git | get-childitem -Recurse
+}
 
 # git cat-file
 # Provides content or type and size information for repository objects
@@ -45,8 +66,34 @@ git help -a
 git help cat-file
 git --help cat-file
 
-# Displays information on objects whose SHA1 values are passed in
+# Displays information on objects
 # Can limit by $blobType if passed, e.g. commit|tree|blob
+
+function displayBlobInfo([string] $sha1)
+{
+    "sha1 $sha1 is a >>> " + (git cat-file $sha1 -t) + " <<<"
+
+    # We have to rebuild, using the short form of the sha1,
+    # a folder\filename so we can get the length
+
+    $folder = $sha1.Substring(0,2)
+
+    $filePrefix = $sha1.Substring(2)
+
+    $file = get-item .\.git\objects\$folder\$filePrefix*
+
+
+    if($file.Length -lt 300)
+    {
+        "sha1 $sha1 contains: >>>" + (git cat-file $sha1 -p) + "<<<"
+    }
+    else
+    {
+        "********** Content > 300 bytes - Not Displayed **********"
+    }
+
+    ""
+}
 
 function displayObjects ($blobType = "")
 {
@@ -60,8 +107,7 @@ function displayObjects ($blobType = "")
 
         foreach ($sha1 in $sha1Folders)
         {
-            "sha1 $sha1 is a >>> " + (git cat-file $sha1 -t) + " <<<"
-            "sha1 $sha1 contains: >>>" + (git cat-file $sha1 -p) + "<<<"
+            displayBlobInfo $sha1
             ""
         }
     }
@@ -75,8 +121,7 @@ function displayObjects ($blobType = "")
 
             if($blobType -eq $objectType)
             {          
-                "sha1 $sha1 is a >>> " + (git cat-file $sha1 -t) + " <<<"
-                "sha1 $sha1 contains: >>>" + (git cat-file $sha1 -p) + "<<<"
+                displayBlobInfo $sha1
                 ""
             }
         }
@@ -119,26 +164,31 @@ function displayObjectsFolder()
 
     foreach ($fld in $objectFolders)
     {
-        get-childitem -Path $objects\$fld
+        get-childitem -Path $objects\$fld -Recurse
     }
 }
 
 function displayBranches()
 {
+    delimitmsg "git branch -a"
+
+    git branch -a
+
     $refs = ".\.git\refs"
 
     $refsFolders = get-childitem -Path $refs
 
-    "refs\ contains"
+    delimitmsg "refs\ contains"
 
     $refsFolders
 
     foreach ($fld in $refsFolders)
     {
-        get-childitem -Path $refs\$fld
+        get-childitem -Path $refs\$fld -Recurse
     }
 
-    "HEAD contains"
+    ""
+    delimitmsg "HEAD contains"
     get-content .\.git\HEAD
 }
 
@@ -175,22 +225,9 @@ function whatsUpGit($blobType = "")
 
     git branch -a
 
- #   delimitmsg "displayObjectsFolder"
-
- #   displayObjectsFolder
-
- #   delimitmsg "getSHA1s"
-
-  #  getSHA1s
-
     delimitmsg "displayObjects $blobType"
 
     displayObjects $blobType
-}
-
-function showWorkingArea()
-{
-    get-childitem -Exclude .git | get-childitem -Recurse
 }
 
 function delimitmsg($msg)
@@ -203,7 +240,9 @@ function delimitmsg($msg)
 
 #endregion
 
+################################################################
 # Git 101
+################################################################
 
 cd $TrainingRootFolder
 
@@ -212,6 +251,18 @@ cd $TrainingRootFolder
 Remove-Item -path NewGitRepo -Force -Recurse
 New-Item -Path NewGitRepo -ItemType Directory
 cd .\NewGitRepo
+
+#region Help
+
+git help
+git help -g
+git help -a
+#git help <command>
+#git help <command> -v
+
+#NB - Be really careful as git help command launches browser and locks folder 
+
+#endregion
 
 # create a new empty repository
 
@@ -225,6 +276,10 @@ git status
 
 git log
 
+# In time you will learn more log options, for now just know they are there
+
+git help log
+
 # Check out what is happening with branches
 # since we haven't added and committed anything yet, list is empty
 
@@ -236,18 +291,30 @@ git branch
 
 git branch -a
 
+displayBranches
+
+# Oh, yeah, one more thing
+# If you see this
+
+git Log
+
+# Do this (lowercase)
+
+git log
+
 <#********************************************************************
 This is an Optional Extra Credit Section that should only be done
 to show how to look at the objects that get created and learn about SHA1
 We will zap the repository and start again at the end of this section.
 
-Just introducing use of functions
+Also introducing use of functions, infra
 
     displayObjectsFolder
     getSHA1s
     displayObjects
 
 **********************************************************************#>
+
 
 displayObjectsFolder
 getSHA1s
@@ -297,13 +364,15 @@ get-childitem -recurse
 
 git init
 
+# Let's see what is in a Git Repo (.git folder)
+
 get-childitem -path .git -recurse
+
+# Introduce whatsUpGitLong so we don't have to look in .git folder
 
 whatsUpGitLong
 
 # Copy in contents of starting files from Git101Rep
-
-cd $TrainingRootFolder\Git101Repo
 
 cd $TrainingRootFolder\Git101Repo
 git checkout Start
@@ -317,17 +386,27 @@ cd $TrainingRootFolder\NewGitRepo
 showWorkingArea
 
 # What does Git think is happening?
+# whatsUpGit is a little less verbose
 
 whatsUpGit
+
+# Note the difference between how git status behaves with untracked files
+
+git status
+git status --untracked-files
 
 git add .
 
 whatsUpGit
 
+# We could do a commit right now, 
+# but let's stage (add to index area) a few more files.
+
 # Lets go and update the recipies.txt file and add eggs.txt and tacos.txt
 
 cd $TrainingRootFolder\Git101Repo
 showWorkingArea
+
 git checkout FirstUpdate
 showWorkingArea
 
@@ -343,6 +422,7 @@ git status
 git diff
 
 # What do we see in .git and .git\objects
+# Pay attention to the new files in the objest folder.  Any surprises?
 
 whatsUpGitLong
 
@@ -350,9 +430,12 @@ git add .
 
 whatsUpGitLong
 
-# All right, let's commit this 
+# All right, let's commit this
+# Normally we want the Date and Time but to make the demo consistent
+# let's force the date
 
-git commit -m "First Commit"
+$today = get-date -DisplayHint Date
+git commit -m "First Commit" --date=$today
 
 # Now what does .git know
 
@@ -374,7 +457,6 @@ showWorkingArea
 
 copy-item -Path .\Lunch -Destination ..\NewGitRepo -Recurse -Force
 cd $TrainingRootFolder\NewGitRepo
-
 
 git add .
 git commit -m "Add Sandwich.txt"
@@ -434,6 +516,36 @@ git clone $ChristopherGitHub/PurpleTeam.git
 
 git remote add origin https://github.com/chrhodes/GitTraining.git
 
+git remote -v
+
+
+<#*********************************************************************************
+    Hackinng Around to greate Branches in GitTraining
+*********************************************************************************#>
+
+
+git Branch
+git branch
+
+
+git branch RedTeam
+
+git branch GreenTeam
+
+git branch BlueTeam
+
+git branch PurpleTeam
+
+git checkout PurpleTeam
+
+n++ recipies.txt
+
+mkdir Breakfast
+mkdir Lunch
+mkdir Dinner
+git commit -a -m "Staring Files and Folders"
+git push
+git remote
 git remote -v
 
 
