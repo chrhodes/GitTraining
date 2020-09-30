@@ -31,8 +31,6 @@ $ChristopherGitHub = "https://github.com/chrhodes"
 
 #endregion
 
-
-
 ################################################################
 # NB.  Need to load these functions before starting to work.
 ################################################################
@@ -238,13 +236,26 @@ function delimitmsg($msg)
     Write-Host -ForegroundColor Red $delimitS ("{0,-30}" -f $msg) $delimitE
 }
 
+function createRepo($name)
+{
+    cd $TrainingRootFolder
+    Remove-Item -path $name -Force -Recurse
+    New-Item -Path $name -ItemType Directory
+    cd .\$name
+    git init
+}
+
 #endregion
 
-#region Git 101
-
 ################################################################
+# 
 # Git 101
+#
+# Covers these commands and concepts
+#
 ################################################################
+
+#region Git 101
 
 cd $TrainingRootFolder
 
@@ -305,6 +316,10 @@ git Log
 # Do this (lowercase)
 
 git log
+
+# See how many and how big
+
+git count-objects
 
 #endregion
 
@@ -493,13 +508,34 @@ displayObjects commit
 displayObjects tree
 displayObjects blob
 
+
+# One final type of Object - Tags
+
+# Create new empty repo
+# commit a file
+# add an annotated tag
+
+git tag -a mytag -m "Tag Message"
+git tag
+git cat-file -p mytag
+git cat-file -t mytag
+# can also pass sha1
+
+# just a tag (no blob to hold content)
+
+git tag -a anothertag
+
 #endregion
 
-#region Git 102
+################################################################
+# 
+# Git102
+#
+# Covers these commands and concepts
+#
+################################################################
 
-<#*********************************************************************************
-    Git102
-*********************************************************************************#>
+#region Git 102
 
 # Clone a remote repository
 
@@ -574,7 +610,6 @@ mkdir Lunch
 mkdir Dinner
 # Copy README.txt from Breakfast
 
-
 git commit -a -m "Staring Files and Folders"
 
 # Push changes to Remote Origin PurpleTeam Branch
@@ -602,14 +637,94 @@ git cherry-pick f0f6
 # Show TortiseGit UI
 # Show SourceTree UI
 
+# Makes some changes in files
+
+# Merge things
+
+createRepo Git102Repo
+
+New-Item -Path . -Name recipies.txt -ItemType "file" -Value "Breakfast
+Dinner"
+get-content .\recipies.txt
+git add .
+git commit -m "No Recipies"
+git branch Chef
+git checkout Chef
+New-Item -Path . -Name recipies.txt -ItemType "file" -Value "Breakfast
+Lunch
+Afternoon Tea
+Dinner
+Bedtime Snack" -Force
+get-content .\recipies.txt
+git add .\recipies.txt
+git commit -m "Master Chef Recipies"
+
+git checkout master
+get-content .\recipies.txt
+
+# This is considered a fast forward merge
+
+git merge Chef
+
+createRepo Git102ARepo
+
+New-Item -Path . -Name recipies.txt -ItemType "file" -Force
+get-content .\recipies.txt
+
+git add .
+git commit -m "No Recipies"
+
+git branch Chef
+
+New-Item -Path . -Name recipies.txt -ItemType "file" -Value "Breakfast
+Dinner" -Force
+get-content .\recipies.txt
+
+git add .
+git commit -m "My Recipies"
+
+git checkout Chef
+
+get-content .\recipies.txt
+
+New-Item -Path . -Name recipies.txt -ItemType "file" -Value "Breakfast
+Lunch
+Afternoon Tea
+Dinner
+Bedtime Snack" -Force
+get-content .\recipies.txt
+git add .\recipies.txt
+git commit -m "Master Chef Recipies"
+
+git checkout master
+get-content .\recipies.txt
+
+# Cannot do fast forward merge - resolve then commit
+
+git merge Chef
+get-content .\recipies.txt
+n++ .\recipies.txt
+
+git add .\recipies.txt
+git commit -m "Our Recipies"
+
+git checkout Chef
+get-content .\recipies.txt
 
 #endregion
 
+################################################################
+#
+# Git102 3
+#
+# Covers these commands and concepts
+#
+#
+################################################################
+
 #region Git 103
 
-<#*********************************************************************************
-    Git102
-*********************************************************************************#>
+
 
 #endregion
 
