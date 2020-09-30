@@ -69,7 +69,14 @@ git --help cat-file
 
 function displayBlobInfo([string] $sha1)
 {
-    "sha1 $sha1 is a >>> " + (git cat-file $sha1 -t) + " <<<"
+    delimitmsg SHA1
+    $sha1
+
+    delimitmsg "get-content -t"
+    $blobtype = git cat-file $sha1 -t
+    $blogtype
+
+    #"sha1 $sha1 is a >>> " + (git cat-file $sha1 -t) + " <<<"
 
     # We have to rebuild, using the short form of the sha1,
     # a folder\filename so we can get the length
@@ -80,14 +87,24 @@ function displayBlobInfo([string] $sha1)
 
     $file = get-item .\.git\objects\$folder\$filePrefix*
 
+    delimitmsg "get-content -p"
 
-    if($file.Length -lt 300)
+    switch($blobtype)
     {
-        "sha1 $sha1 contains: >>>" + (git cat-file $sha1 -p) + "<<<"
-    }
-    else
-    {
-        "********** Content > 300 bytes - Not Displayed **********"
+        "commit" { git cat-file $sha1 -p ; break }
+        "tree" { git cat-file $sha1 -p ; break }
+        "tag" { git cat-file $sha1 -p ; break }
+        default {
+
+            if($file.Length -lt 500)
+            {
+                git cat-file $sha1 -p
+            }
+            else
+            {
+                "********** Content (" + $file.Length + ") > 500 bytes - Not Displayed **********"
+            }
+        }
     }
 
     ""
@@ -124,6 +141,20 @@ function displayObjects ($blobType = "")
             }
         }
     }
+}
+
+function displayHEAD()
+{
+    $head = (get-content HEAD).Split(" ")
+    delimitmsg "HEAD Contains"
+    $head
+    delimitmsg "SHA1"
+    $sha1 = get-content $head[1]
+    $sha1
+    delimitmsg "get-content -t"
+    git cat-file $sha1 -t
+    delimitmsg "get-content -p"
+    git cat-file $sha1 -p
 }
 
 # Gets SHA1 values from Objects folder.
