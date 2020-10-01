@@ -55,11 +55,14 @@ Remove-Item -path NewGitRepo -Force -Recurse
 New-Item -Path NewGitRepo -ItemType Directory
 cd .\NewGitRepo
 
+#show createRepo - We will use that going forward
+
 #region Help and some basics
 
 git help
 git help -g
 git help -a
+
 #git help <command>
 #git help <command> -v
 
@@ -176,10 +179,7 @@ cd $TrainingRootFolder
 
 # Create new folder (cleaning up any existing)
 
-Remove-Item -path NewGitRepo -Force -Recurse
-New-Item -Path NewGitRepo -ItemType Directory
-cd .\NewGitRepo
-get-childitem -recurse
+createRepo NewGitRepo
 
 git init
 
@@ -194,10 +194,13 @@ whatsUpGitLong
 # Copy in contents of starting files from Git101Rep
 
 cd $TrainingRootFolder\Git101Repo
+
 git checkout Start
+
 copy-item -Path .\recipies.txt -Destination ..\NewGitRepo
 copy-item -Path .\Breakfast -Destination ..\NewGitRepo -Recurse
 copy-item -Path .\Dinner -Destination ..\NewGitRepo -Recurse
+
 cd $TrainingRootFolder\NewGitRepo
 
 # What is in the Working Area?
@@ -341,7 +344,7 @@ git tag -a anothertag
 
 # NB. If this doesn't work, check that you are using the VPN
 
-cd $TrainingRootFolder
+cd $TrainingRootFolder\JediRepos
 
 # Red Team
 
@@ -353,12 +356,10 @@ git clone $KrishanGitHub/RedTeam.git RedTeam_Krishan
 git clone $GyanGitHub/GreenTeam.git GreenTeam_Gyan
 git clone $PushpGitHub/GreenTeam.git GreenTeam_Pushp
 
-
 # Blue Team
 
 git clone $RohiniGitHub/BlueTeam.git BlueTeam_Rohini
 git clone $AjayGitHub/BlueTeam.git BlueTeam_Ajay
-
 
 # Purple Team
 
@@ -366,23 +367,35 @@ git clone $ChristopherGitHub/PurpleTeam.git PurpleTeam_Christopher
 
 # Push to a (empty) Remote Repository
 
-git remote add origin https://github.com/chrhodes/GitTraining.git
+#git remote add origin https://github.com/chrhodes/JediOrder.git
 
-git remote -v
+#git remote -v
 
 # Get the GitTraining Repo
 # You will start using this to create a mess
 
-git clone $ChristopheGitHub/GitTraining.git
+#git clone $ChristopheGitHub/JediOrder.git
 
 #endregion
 
 #region Branch Hacking
 
 <#*********************************************************************************
-    Hacking Around to greate Branches in GitTraining
+    Hacking Around to create Branches in JediOrder
     To start each team out with something to use.
 *********************************************************************************#>
+
+# Clean Up in case we have done this before
+
+git branch -D RedTeam
+git branch -D GreenTeam
+git branch -D BlueTeam
+git branch -D PurpleTeam
+
+git push origin --delete RedTeam
+git push origin --delete GreenTeam
+git push origin --delete BlueTeam
+git push origin --delete PurpleTeam
 
 # Remember case matters
 
