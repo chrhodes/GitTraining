@@ -36,7 +36,7 @@ $ChristopherGitHub = "https://github.com/chrhodes"
 ################################################################
 
 cd $TrainingRootFolder
-. '.\Git Training Functions.ps1'
+. '.\GitTraining\Git Training Functions.ps1'
 
 ################################################################
 # 
@@ -182,8 +182,6 @@ cd $TrainingRootFolder
 
 createRepo NewGitRepo
 
-git init
-
 # Let's see what is in a Git Repo (.git folder)
 
 get-childitem -path .git -recurse
@@ -206,7 +204,7 @@ cd $TrainingRootFolder\NewGitRepo
 
 # What is in the Working Area?
 
-showWorkingArea
+displayWorkingArea
 
 # What does Git think is happening?
 # whatsUpGit is a little less verbose
@@ -228,10 +226,10 @@ whatsUpGit
 # Lets go and update the recipies.txt file and add eggs.txt and tacos.txt
 
 cd $TrainingRootFolder\Git101Repo
-showWorkingArea
+displayWorkingArea
 
 git checkout FirstUpdate
-showWorkingArea
+displayWorkingArea
 
 copy-item -Path .\recipies.txt -Destination ..\NewGitRepo -Force
 copy-item -Path .\Breakfast -Destination ..\NewGitRepo -Recurse -Force
@@ -274,9 +272,9 @@ displayObjects blob
 # Add Sandwich.txt to Lunch folder
 
 cd $TrainingRootFolder\Git101Repo
-showWorkingArea
+displayWorkingArea
 git checkout SecondUpdate
-showWorkingArea
+displayWorkingArea
 
 copy-item -Path .\Lunch -Destination ..\NewGitRepo -Recurse -Force
 cd $TrainingRootFolder\NewGitRepo
@@ -289,9 +287,9 @@ whatsUpGit
 # Update recipies.txt to include the Sandwich
 
 cd $TrainingRootFolder\Git101Repo
-showWorkingArea
+displayWorkingArea
 git checkout SecondUpdate
-showWorkingArea
+displayWorkingArea
 
 copy-item -Path .\recipies.txt -Destination ..\NewGitRepo -Force
 
