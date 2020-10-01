@@ -51,9 +51,9 @@ cd $TrainingRootFolder
 
 # Create new folder (cleaning up any existing)
 
-Remove-Item -path NewGitRepo -Force -Recurse
-New-Item -Path NewGitRepo -ItemType Directory
-cd .\NewGitRepo
+Remove-Item -path EmptyGitRepo -Force -Recurse
+New-Item -Path EmptyGitRepo -ItemType Directory
+cd .\EmptyGitRepo
 
 #show createRepo - We will use that going forward
 
