@@ -32,8 +32,8 @@ function displayWorkingArea()
 # git cat-file
 # Provides content or type and size information for repository objects
 
-git help cat-file
-git --help cat-file
+#git help cat-file
+#git --help cat-file
 
 # Displays information on objects
 # Can limit by $blobType if passed, e.g. commit|tree|blob
@@ -43,7 +43,7 @@ function displayBlobInfo([string] $sha1)
     delimitmsg SHA1
     $sha1
 
-    delimitmsg "get-content -t"
+    delimitmsg "git cat-file -t"
     $blobtype = git cat-file $sha1 -t
     $blobtype
 
@@ -58,7 +58,7 @@ function displayBlobInfo([string] $sha1)
 
     $file = get-item .\.git\objects\$folder\$filePrefix*
 
-    delimitmsg "get-content -p"
+    delimitmsg "cat-file -p"
 
     switch($blobtype)
     {

@@ -35,6 +35,7 @@ $ChristopherGitHub = "https://github.com/chrhodes"
 # Need to load supporting functions before starting to work.
 ################################################################
 
+cd $TrainingRootFolder
 . '.\Git Training Functions.ps1'
 
 ################################################################
@@ -154,7 +155,7 @@ echo "Hello JediOrder" | git hash-object --stdin
 
 # Add the blob to the index
 
-echo "Hello JediOrder" | git hash-object -w --stdin
+echo "Hello JediOrder!" | git hash-object -w --stdin
 
 # Go look at what just happened
 
@@ -548,7 +549,7 @@ get-content .\recipies.txt
 
 ################################################################
 #
-# Git102 3
+# Git103
 #
 # Covers these commands and concepts
 #
