@@ -55,7 +55,7 @@ Remove-Item -path NewGitRepo -Force -Recurse
 New-Item -Path NewGitRepo -ItemType Directory
 cd .\NewGitRepo
 
-#region Help
+#region Help and some basics
 
 git help
 git help -g
@@ -111,6 +111,10 @@ git log
 
 git count-objects
 
+# Introduce posh-git Prompt
+
+https://github.com/dahlbyk/posh-git/blob/master/README.md#git-status-summary-information
+
 #endregion
 
 #region Optional Extra Credit - But let's do it anyway
@@ -118,16 +122,16 @@ git count-objects
 <#********************************************************************
 This is an Optional Extra Credit Section that should only be done
 to show how to look at the objects that get created and learn about SHA1
+
 We will zap the repository and start again at the end of this section.
 
-Also introducing use of functions, infra
+Also introducing use of functions, see Git Training Functions.ps1
 
     displayObjectsFolder
     getSHA1s
     displayObjects
 
 **********************************************************************#>
-
 
 displayObjectsFolder
 getSHA1s
