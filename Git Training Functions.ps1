@@ -29,6 +29,11 @@ function displayWorkingArea()
     get-childitem -Exclude .git | get-childitem -Recurse
 }
 
+function displayConfig()
+{
+    get-content .\.git\config
+}
+
 # git cat-file
 # Provides content or type and size information for repository objects
 
@@ -114,6 +119,20 @@ function displayObjects ($blobType = "")
     }
 }
 
+function displayObjectsFolder()
+{
+    $objects = ".\.git\objects"
+
+    $objectFolders = get-childitem -Path $objects
+
+    $objectFolders
+
+    foreach ($fld in $objectFolders)
+    {
+        get-childitem -Path $objects\$fld -Recurse
+    }
+}
+
 function displayHEAD()
 {
     $head = (get-content .git\HEAD).Split(" ")
@@ -155,19 +174,7 @@ function getSHA1s()
     return ,$listOfSHA1s
 }
 
-function displayObjectsFolder()
-{
-    $objects = ".\.git\objects"
 
-    $objectFolders = get-childitem -Path $objects
-
-    $objectFolders
-
-    foreach ($fld in $objectFolders)
-    {
-        get-childitem -Path $objects\$fld -Recurse
-    }
-}
 
 function displayBranches()
 {

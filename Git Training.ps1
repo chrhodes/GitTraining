@@ -9,6 +9,8 @@
 #region Configuration
 
 $TrainingRootFolder = "C:\Training\Git"
+$GitTrainingRepo = "C:\Training\Git\GitTraining"
+$vncRepo = "C:\vnc\git\vnc"
 
 # Red Team
 
@@ -33,6 +35,33 @@ $ChristopherGitHub = "https://github.com/chrhodes"
 
 ################################################################
 # Need to load supporting functions before starting to work.
+#
+# These help display info in the Git Repo and the Working Area
+# Mostly used to help you learn the internals of .Git which you
+# can the promptly forget
+#
+#   displayGitRepo
+#
+#     displayObjectsFolder
+#     displayObjects
+#     displayHEAD
+#     displayBranchs
+#     displayBlobInfo( [string] $sha1 )
+#     getSHA1s
+#
+#   displayWorkingArea
+#
+# These run several things that help you see whats going on
+# You will likely just use git status once you understand
+#
+# whatsUpGit
+# whatsUpGitLong
+#
+# This separates output to make it easier to see
+#
+#   delimitmsg
+#
+#
 ################################################################
 
 cd $TrainingRootFolder
@@ -44,11 +73,25 @@ cd $TrainingRootFolder
 #
 # Covers these commands and concepts
 #
+#   git version
+#   git help
+#   git init
+#   git status
+#   git log
+#   git branch
+#   git count-objects
+#
 ################################################################
 
 #region Git 101
 
 cd $TrainingRootFolder
+
+# Check what version you are running
+# Download new versions from here
+# https://git-scm.com/downloads
+
+git version
 
 # Create new folder (cleaning up any existing)
 
@@ -63,6 +106,12 @@ cd .\EmptyGitRepo
 git help
 git help -g
 git help -a
+
+#Config Intro - We will cover this in detail later in Git102
+
+git config -l  # git config -list
+
+git config -l --show-origin --show-scope
 
 #git help <command>
 #git help <command> -v
@@ -119,6 +168,11 @@ git count-objects
 
 https://github.com/dahlbyk/posh-git/blob/master/README.md#git-status-summary-information
 
+# Might want to use ZLocation
+# https://github.com/vors/ZLocation
+
+Install-Module ZLocation -Scope CurrentUser
+
 #endregion
 
 #region Optional Extra Credit - But let's do it anyway
@@ -128,6 +182,11 @@ This is an Optional Extra Credit Section that should only be done
 to show how to look at the objects that get created and learn about SHA1
 
 We will zap the repository and start again at the end of this section.
+
+# Covers these commands and concepts
+#
+#   git-hash-object
+#   git cat-file
 
 Also introducing use of functions, see Git Training Functions.ps1
 
@@ -329,13 +388,44 @@ git tag -a anothertag
 #
 # Covers these commands and concepts
 #
+#    git config
+#
+#
 ################################################################
 
 #region Git 102
 
-<#*********************************************************************************
+<#**************************************************************
+    COnfiguring Git
+
+    git config
+    git config --list
+   
+**************************************************************#>
+
+# Check if anything exists in environment
+
+get-childitem env:*user*
+
+get-childitem env:*config*
+get-childitem env:*git*
+
+git config
+git config -l  # git config -list
+
+git config -l --show-origin
+git config -l --show-scope
+git config -l --show-origin --show-scope
+
+
+git config --global --edit
+git config --system --edit
+git config --local --edit
+git config --worktree
+
+<#**************************************************************
     Quick preview of cloning remote repos
-*********************************************************************************#>
+**************************************************************#>
 
 #region Cloning
 
