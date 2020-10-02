@@ -142,6 +142,12 @@ git status
 # Show history of what has happened
 
 git log
+git log --oneline
+git log --oneline --graph
+git log --oneline --graph --decorate
+git log --oneline --graph --decorate --all
+git log --stat
+git log --patch
 
 # In time you will learn more log options, for now just know they are there
 
