@@ -2,9 +2,18 @@
 # BD Jedi Order Git Training
 ################################################################
 
+#https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/about-authentication-to-github
+#https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/set-up-git#next-steps-authenticating-with-github-from-git
+#https://docs.github.com/en/free-pro-team@latest/github/using-git/which-remote-url-should-i-use#cloning-with-https-urls
+#https://docs.github.com/en/free-pro-team@latest/github/using-git/caching-your-github-credentials-in-git
+
 ################################################################
 # Configure Information that may differ by each person's machine
 ################################################################
+
+# Get current Git
+git version
+git update-git-for-windows
 
 #region Configuration
 
@@ -167,6 +176,7 @@ git count-objects
 # Introduce posh-git Prompt
 
 https://github.com/dahlbyk/posh-git/blob/master/README.md#git-status-summary-information
+PowerShellGet\Install-Module posh-git -Scope CurrentUser -AllowPrerelease -Force
 
 # Might want to use ZLocation
 # https://github.com/vors/ZLocation
@@ -417,9 +427,9 @@ git config -l --show-origin
 git config -l --show-scope
 git config -l --show-origin --show-scope
 
-
-git config --global --edit
 git config --system --edit
+git config --global --edit
+
 git config --local --edit
 git config --worktree
 
