@@ -18,8 +18,11 @@ git update-git-for-windows
 #region Configuration
 
 $TrainingRootFolder = "C:\Training\Git"
-$GitTrainingRepo = "C:\Training\Git\GitTraining"
-$vncRepo = "C:\vnc\git\vnc"
+
+$GitTraining = "C:\Training\Git\GitTraining"
+$GitTrainingContent = "C:\Training\Git\GitTrainingContent"
+
+#$vncRepo = "C:\vnc\git\vnc"
 
 # Red Team
 
@@ -70,7 +73,6 @@ $ChristopherGitHub = "https://github.com/chrhodes"
 #
 #   delimitmsg
 #
-#
 ################################################################
 
 cd $TrainingRootFolder
@@ -78,7 +80,7 @@ cd $TrainingRootFolder
 
 ################################################################
 # 
-# Git 101
+# Git 000
 #
 # Covers these commands and concepts
 #
@@ -92,7 +94,7 @@ cd $TrainingRootFolder
 #
 ################################################################
 
-#region Git 101
+#region Git 000
 
 cd $TrainingRootFolder
 
@@ -142,12 +144,6 @@ git status
 # Show history of what has happened
 
 git log
-git log --oneline
-git log --oneline --graph
-git log --oneline --graph --decorate
-git log --oneline --graph --decorate --all
-git log --stat
-git log --patch
 
 # In time you will learn more log options, for now just know they are there
 
@@ -251,6 +247,22 @@ End Optional Extra Credit Section
 # Ok, lets pretend we didn't do any of that
 # Start Clean
 
+################################################################
+# 
+# Git 100
+#
+# Covers these commands and concepts
+#
+#   git version
+#   git help
+#   git init
+#   git status
+#   git log
+#   git branch
+#   git count-objects
+#
+################################################################
+
 cd $TrainingRootFolder
 
 # Create new folder (cleaning up any existing)
@@ -259,15 +271,15 @@ createRepo NewGitRepo
 
 # Let's see what is in a Git Repo (.git folder)
 
-get-childitem -path .git -recurse
+displayGitRepo
 
 # Introduce whatsUpGitLong so we don't have to look in .git folder
 
 whatsUpGitLong
 
-# Copy in contents of starting files from Git101Rep
+# Copy in contents of starting files from GitTrainingContent
 
-cd $TrainingRootFolder\Git101Repo
+cd $TrainingRootFolder\GitTrainingContent
 
 git checkout Start
 
@@ -288,8 +300,8 @@ whatsUpGit
 
 # Note the difference between how git status behaves with untracked files
 
-git status
-git status --untracked-files
+#git status
+#git status --untracked-files
 
 git add .
 
@@ -300,7 +312,7 @@ whatsUpGit
 
 # Lets go and update the recipies.txt file and add eggs.txt and tacos.txt
 
-cd $TrainingRootFolder\Git101Repo
+cd $TrainingRootFolder\GitTrainingContent
 displayWorkingArea
 
 git checkout FirstUpdate
@@ -313,7 +325,7 @@ cd $TrainingRootFolder\NewGitRepo
 
 # What does git think happened
 
-git status
+whatsUpGit
 
 git diff
 
@@ -327,11 +339,8 @@ git add .
 whatsUpGitLong
 
 # All right, let's commit this
-# Normally we want the Date and Time but to make the demo consistent
-# let's force the date
 
-$today = get-date -DisplayHint Date
-git commit -m "First Commit" --date=$today
+git commit -m "First Commit" 
 
 # Now what does .git know
 
@@ -346,7 +355,7 @@ displayObjects blob
 
 # Add Sandwich.txt to Lunch folder
 
-cd $TrainingRootFolder\Git101Repo
+cd $TrainingRootFolder\GitTrainingContent
 displayWorkingArea
 git checkout SecondUpdate
 displayWorkingArea
@@ -361,7 +370,7 @@ whatsUpGit
 
 # Update recipies.txt to include the Sandwich
 
-cd $TrainingRootFolder\Git101Repo
+cd $TrainingRootFolder\GitTrainingContent
 displayWorkingArea
 git checkout SecondUpdate
 displayWorkingArea
@@ -395,6 +404,18 @@ git cat-file -t mytag
 # just a tag (no blob to hold content)
 
 git tag -a anothertag
+
+# Let's look back at all we did
+
+# Show history of what has happened
+
+git log
+git log --oneline
+git log --oneline --graph
+git log --oneline --graph --decorate
+git log --oneline --graph --decorate --all
+git log --stat
+git log --patch
 
 #endregion
 
