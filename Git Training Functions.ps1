@@ -174,8 +174,6 @@ function getSHA1s()
     return ,$listOfSHA1s
 }
 
-
-
 function displayBranches()
 {
     delimitmsg "git branch -a"
@@ -206,9 +204,7 @@ function whatsUpGitLong()
 
     git status
 
-    delimitmsg "git branch -a"
-
-    git branch -a
+    displaybranches
 
     delimitmsg "displayObjectsFolder"
 
@@ -229,9 +225,7 @@ function whatsUpGit($blobType = "")
 
     git status
 
-    delimitmsg "git branch -a"
-
-    git branch -a
+    displaybranches
 
     delimitmsg "displayObjects $blobType"
 
