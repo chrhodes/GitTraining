@@ -279,7 +279,7 @@ whatsUpGitLong
 
 # Copy in contents of starting files from GitTrainingContent
 
-cd $TrainingRootFolder\GitTrainingContent
+cd $GitTrainingContent
 
 git checkout Start
 
@@ -312,7 +312,7 @@ whatsUpGit
 
 # Lets go and update the recipies.txt file and add eggs.txt and tacos.txt
 
-cd $TrainingRootFolder\GitTrainingContent
+cd $GitTrainingContent
 displayWorkingArea
 
 git checkout FirstUpdate
@@ -346,6 +346,8 @@ git commit -m "First Commit"
 
 whatsUpGitLong
 
+whatsUpGit
+
 # Ok, a lot just happened.  Let's see if we can understand it
 # Using our knowledge of object types
 
@@ -355,8 +357,9 @@ displayObjects blob
 
 # Add Sandwich.txt to Lunch folder
 
-cd $TrainingRootFolder\GitTrainingContent
+cd $GitTrainingContent
 displayWorkingArea
+
 git checkout SecondUpdate
 displayWorkingArea
 
@@ -370,8 +373,9 @@ whatsUpGit
 
 # Update recipies.txt to include the Sandwich
 
-cd $TrainingRootFolder\GitTrainingContent
+cd $GitTrainingContent
 displayWorkingArea
+
 git checkout SecondUpdate
 displayWorkingArea
 
@@ -416,6 +420,21 @@ git log --oneline --graph --decorate
 git log --oneline --graph --decorate --all
 git log --stat
 git log --patch
+
+# And just for fun, let's go look at how 
+# the GitTrainingContent folder progressed
+
+cd $GitTrainingContent
+
+git log
+git log --oneline
+git log --oneline --graph
+git log --oneline --graph --decorate
+git log --oneline --graph --decorate --all
+git log --stat
+git log --patch
+
+# All right.  You made it.  Go forth and Git!
 
 #endregion
 
