@@ -6,6 +6,8 @@
 # Configure Information that may differ by each person's machine
 ################################################################
 
+Clear-Host
+
 #region Configuration
 
 $TrainingRootFolder = "C:\Training\Git"
