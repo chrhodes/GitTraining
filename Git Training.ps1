@@ -24,6 +24,8 @@ $TrainingRootFolder = "C:\Training\Git"
 $GitTraining = "C:\Training\Git\GitTraining"
 $GitTrainingContent = "C:\Training\Git\GitTrainingContent"
 
+#region GitRepos
+
 #$vncRepo = "C:\vnc\git\vnc"
 
 # Red Team
@@ -44,6 +46,8 @@ $RohiniGitHub = "https://github.com/RohiniSharma11"
 # Purple Team
 
 $ChristopherGitHub = "https://github.com/chrhodes"
+
+#endregion
 
 #endregion
 
@@ -249,6 +253,8 @@ End Optional Extra Credit Section
 # Ok, lets pretend we didn't do any of that
 # Start Clean
 
+#endregion
+
 ################################################################
 # 
 # Git 100
@@ -265,6 +271,7 @@ End Optional Extra Credit Section
 #
 ################################################################
 
+Clear-Host
 cd $TrainingRootFolder
 
 # Create new folder (cleaning up any existing)
@@ -284,6 +291,8 @@ whatsUpGitLong
 cd $GitTrainingContent
 
 git checkout Start
+
+displayWorkingArea
 
 copy-item -Path .\recipies.txt -Destination ..\NewGitRepo
 copy-item -Path .\Breakfast -Destination ..\NewGitRepo -Recurse
@@ -307,7 +316,7 @@ whatsUpGit
 
 git add .
 
-whatsUpGit
+whatsUpGitLong
 
 # We could do a commit right now, 
 # but let's stage (add to index area) a few more files.
