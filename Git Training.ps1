@@ -103,6 +103,7 @@ cd $TrainingRootFolder
 #region Git 000
 
 cd $TrainingRootFolder
+Clear-Host
 
 # Check what version you are running
 # Download new versions from here
@@ -318,6 +319,8 @@ git add .
 
 whatsUpGitLong
 
+# What got created?  Did the number of objects surprise you?
+
 # We could do a commit right now, 
 # but let's stage (add to index area) a few more files.
 
@@ -332,6 +335,7 @@ displayWorkingArea
 copy-item -Path .\recipies.txt -Destination ..\NewGitRepo -Force
 copy-item -Path .\Breakfast -Destination ..\NewGitRepo -Recurse -Force
 copy-item -Path .\Dinner -Destination ..\NewGitRepo -Recurse -Force
+
 cd $TrainingRootFolder\NewGitRepo
 
 # What does git think happened
@@ -362,6 +366,7 @@ whatsUpGit
 # Ok, a lot just happened.  Let's see if we can understand it
 # Using our knowledge of object types
 
+Clear-Hos
 displayObjects commit
 displayObjects tree
 displayObjects blob
@@ -377,10 +382,13 @@ displayWorkingArea
 copy-item -Path .\Lunch -Destination ..\NewGitRepo -Recurse -Force
 cd $TrainingRootFolder\NewGitRepo
 
-git add .
-git commit -m "Add Sandwich.txt"
+git status
 
-whatsUpGit
+git add .
+
+git status
+
+git commit -m "Add Sandwich.txt"
 
 # Update recipies.txt to include the Sandwich
 
@@ -394,15 +402,17 @@ copy-item -Path .\recipies.txt -Destination ..\NewGitRepo -Force
 
 cd $TrainingRootFolder\NewGitRepo
 
-git add .
-git commit -m "Update recipies.txt"
+git status
 
-whatsUpGit
+git add .
+
+git status
+
+git commit -m "Update recipies.txt"
 
 displayObjects commit
 displayObjects tree
 displayObjects blob
-
 
 # One final type of Object - Tags
 
@@ -421,6 +431,7 @@ git cat-file -t mytag
 git tag -a anothertag
 
 # Let's look back at all we did
+
 
 # Show history of what has happened
 
