@@ -21,6 +21,14 @@ git update-git-for-windows
 
 $TrainingRootFolder = "C:\Training\Git"
 
+################################################################
+# Clone the Training materials.  Only need to do this once
+################################################################
+
+$ChristopherGitHub = "https://github.com/chrhodes"
+git clone $ChristopherGitHub/GitTraining.git
+git clone $ChristopherGitHub/GitTrainingContent.git
+
 $GitTraining = "C:\Training\Git\GitTraining"
 $GitTrainingContent = "C:\Training\Git\GitTrainingContent"
 
@@ -414,6 +422,10 @@ displayObjects commit
 displayObjects tree
 displayObjects blob
 
+# You can use git log to see a commit
+
+git log da95
+
 # One final type of Object - Tags
 
 # Create new empty repo
@@ -468,13 +480,15 @@ git log --patch
 #
 #    git config
 #
+#    git branch
+#    git merge
 #
 ################################################################
 
 #region Git 102
 
 <#**************************************************************
-    COnfiguring Git
+    Configuring Git
 
     git config
     git config --list
@@ -531,6 +545,11 @@ git clone $AjayGitHub/BlueTeam.git BlueTeam_Ajay
 # Purple Team
 
 git clone $ChristopherGitHub/PurpleTeam.git PurpleTeam_Christopher
+
+cd $TrainingRootFolder
+
+git clone $ChristopherGitHub/GitTraining.git
+git clone $ChristopherGitHub/GitTrainingContent.git
 
 # Push to a (empty) Remote Repository
 
@@ -725,6 +744,55 @@ get-content .\recipies.txt
 #region Git 103
 
 
+createRepo GitCommands
+
+git status
+
+New-Item -Path . -Name recipies.txt -ItemType "file"
+
+git status
+
+git diff
+git diff --cached
+
+git add .
+
+git status
+
+git diff
+git diff --cached
+
+git commit -m "Empty File"
+
+git status
+
+git diff
+git diff --cached
+
+Set-Content -Path .\recipies.txt -Value "Breakfast"
+
+git status
+
+git diff
+git diff --cached
+
+git add .
+
+git status
+
+git diff
+git diff --cached
+
+git commit -m "Update recipies.txt"
+
+git status
+
+git diff
+git diff --cached
+
+git log
+
+displayObjects commit
 
 #endregion
 
