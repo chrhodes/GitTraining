@@ -757,6 +757,9 @@ git diff --cached
 
 git add .
 
+# Notice that a blob got created
+displayobjects
+
 git status
 
 git diff
