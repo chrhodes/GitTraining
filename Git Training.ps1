@@ -556,6 +556,9 @@ git clone $ChristopherGitHub/GitTrainingContent.git
 # Push to a (empty) Remote Repository
 
 #git remote add origin https://github.com/chrhodes/JediOrder.git
+# if no remote branch, e.g. main vs master
+
+#git push --set-upstream origin master
 
 #git remote -v
 
