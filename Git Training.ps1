@@ -26,8 +26,10 @@ $TrainingRootFolder = "C:\Training\Git"
 ################################################################
 
 $ChristopherGitHub = "https://github.com/chrhodes"
+
 git clone $ChristopherGitHub/GitTraining.git
 git clone $ChristopherGitHub/GitTrainingContent.git
+
 
 $GitTraining = "C:\Training\Git\GitTraining"
 $GitTrainingContent = "C:\Training\Git\GitTrainingContent"
