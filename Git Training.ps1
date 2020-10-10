@@ -20,6 +20,7 @@ git update-git-for-windows
 #region Configuration
 
 $TrainingRootFolder = "C:\Training\Git"
+#$TrainingRootFolder = "P:\GitHub\chrhodes"
 
 ################################################################
 # Clone the Training materials.  Only need to do this once
@@ -31,8 +32,8 @@ git clone $ChristopherGitHub/GitTraining.git
 git clone $ChristopherGitHub/GitTrainingContent.git
 
 
-$GitTraining = "C:\Training\Git\GitTraining"
-$GitTrainingContent = "C:\Training\Git\GitTrainingContent"
+$GitTraining = "$TrainingRootFolder\GitTraining"
+$GitTrainingContent = "$TrainingRootFolder\GitTrainingContent"
 
 #region GitRepos
 
@@ -194,8 +195,21 @@ git count-objects
 
 # Introduce posh-git Prompt
 
+# Clone this Repo
+
+https://github.com/dahlbyk/posh-git
+cd .\posh-git
+.\install.ps1
+
+# Info on cusomizing prompt
+
 https://github.com/dahlbyk/posh-git/blob/master/README.md#git-status-summary-information
-PowerShellGet\Install-Module posh-git -Scope CurrentUser -AllowPrerelease -Force
+
+Install-Module posh-git -Name posh-git -Scope CurrentUser
+
+
+
+#PowerShellGet\Install-Module posh-git -Scope CurrentUser -AllowPrerelease -Force
 
 # Might want to use ZLocation
 # https://github.com/vors/ZLocation
