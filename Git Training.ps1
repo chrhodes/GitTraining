@@ -23,6 +23,7 @@ git update-git-for-windows
 
 $TrainingRootFolder = "C:\Training\Git"
 #$TrainingRootFolder = "P:\GitHub\chrhodes"
+#$TrainingRootFolder = "C:\vnc\git\chrhodes"
 
 # Hilight lines down to END HILIGHT and execute each time
 
@@ -573,6 +574,10 @@ git config --local -remove-section user
 
 git config --local --edit
 git config alias.st status
+git config --local --edit
+
+git config --global alias.cma "commit --all -m"
+git config --global alias.st "status --short --branch"
 
 #endregion
 
