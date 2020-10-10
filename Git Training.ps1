@@ -15,12 +15,16 @@ Clear-Host
 
 # Get current Git
 git version
+
+# Can use this to update to latest
 git update-git-for-windows
 
 #region Configuration
 
 $TrainingRootFolder = "C:\Training\Git"
 #$TrainingRootFolder = "P:\GitHub\chrhodes"
+
+#region One Time Only
 
 ################################################################
 # Clone the Training materials.  Only need to do this once
@@ -31,9 +35,16 @@ $ChristopherGitHub = "https://github.com/chrhodes"
 git clone $ChristopherGitHub/GitTraining.git
 git clone $ChristopherGitHub/GitTrainingContent.git
 
+#endregion
 
 $GitTraining = "$TrainingRootFolder\GitTraining"
 $GitTrainingContent = "$TrainingRootFolder\GitTrainingContent"
+
+# Hilight lines down to END HILIGHT and execute each time
+
+$TrainingRootFolder = "C:\Training\Git"
+$GitTraining = "C:\Training\Git\GitTraining"
+$GitTrainingContent = "C:\Training\Git\GitTrainingContent"
 
 #region GitRepos
 
@@ -57,6 +68,8 @@ $RohiniGitHub = "https://github.com/RohiniSharma11"
 # Purple Team
 
 $ChristopherGitHub = "https://github.com/chrhodes"
+
+# END HILIGHT
 
 #endregion
 
@@ -206,8 +219,6 @@ cd .\posh-git
 https://github.com/dahlbyk/posh-git/blob/master/README.md#git-status-summary-information
 
 Install-Module posh-git -Name posh-git -Scope CurrentUser
-
-
 
 #PowerShellGet\Install-Module posh-git -Scope CurrentUser -AllowPrerelease -Force
 
@@ -521,15 +532,45 @@ get-childitem env:*git*
 git config
 git config -l  # git config -list
 
+# Limit to scope
+
+git config -l --system
+git config -l --global
+git config -l --local
+
 git config -l --show-origin
 git config -l --show-scope
 git config -l --show-origin --show-scope
 
+# Edit file
+
 git config --system --edit
 git config --global --edit
-
 git config --local --edit
 git config --worktree
+
+# Get a value
+
+git config user.name
+
+git config --system user.name
+git config --global user.name
+git config --local user.name
+
+
+# Set a value
+
+git config --system user.name "Christopher Rhodes"
+git config --global user.name "Christopher Rhodes"
+git config --local user.name "Christopher Rhodes"
+
+# Remove a setting
+
+git config --local --unset user.name
+
+# Remove a section
+
+git config --local -remove-section user
 
 <#**************************************************************
     Quick preview of cloning remote repos
@@ -568,18 +609,37 @@ git clone $ChristopherGitHub/GitTraining.git
 git clone $ChristopherGitHub/GitTrainingContent.git
 
 # Push to a (empty) Remote Repository
+# NB. You will cause yourself grief if you don't leave your new repository
+# e.g. on GitHub,
+# empty before you try to sync
+# Resist the urge to create README.md files, etc.
 
 #git remote add origin https://github.com/chrhodes/JediOrder.git
-# if no remote branch, e.g. main vs master
+
+# Set the remote upstream to master
 
 #git push --set-upstream origin master
 
+# To sync up tracking
+# where master and master are the branches to sync
+
+#git branch --set-upstream-to=origin/master master
+
 #git remote -v
+
+# If you don't start with an empty remote repository and you try to sync them
+# you will get this error
+
+#
+#    fatal: refusing to merge unrelated histories
+#
+# To correct
+# git pull origin master --allow-unrelated-histories
 
 # Get the GitTraining Repo
 # You will start using this to create a mess
 
-#git clone $ChristopheGitHub/JediOrder.git
+#git clone $ChristopherGitHub/JediOrder.git
 
 #endregion
 
@@ -762,7 +822,6 @@ get-content .\recipies.txt
 
 #region Git 103
 
-
 createRepo GitCommands
 
 git status
@@ -815,6 +874,31 @@ git diff --cached
 git log
 
 displayObjects commit
+
+#endregion
+
+################################################################
+#
+# Git301
+#
+# Covers these commands and concepts
+#
+#
+################################################################
+
+#region Git 301
+
+# Submodules
+
+createRepo GitSubModules
+
+cd $TrainingRootFolder
+
+git clone $ChristopherGitHub/PurpleTeam.git PurpleTeam_Christopher
+
+cd PurpleTeam_Christopher
+
+git submodule add $ChristopherGitHub/vnc.git vnc
 
 #endregion
 
