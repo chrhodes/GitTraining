@@ -24,27 +24,10 @@ git update-git-for-windows
 $TrainingRootFolder = "C:\Training\Git"
 #$TrainingRootFolder = "P:\GitHub\chrhodes"
 
-#region One Time Only
-
-################################################################
-# Clone the Training materials.  Only need to do this once
-################################################################
-
-$ChristopherGitHub = "https://github.com/chrhodes"
-
-git clone $ChristopherGitHub/GitTraining.git
-git clone $ChristopherGitHub/GitTrainingContent.git
-
-#endregion
+# Hilight lines down to END HILIGHT and execute each time
 
 $GitTraining = "$TrainingRootFolder\GitTraining"
 $GitTrainingContent = "$TrainingRootFolder\GitTrainingContent"
-
-# Hilight lines down to END HILIGHT and execute each time
-
-$TrainingRootFolder = "C:\Training\Git"
-$GitTraining = "C:\Training\Git\GitTraining"
-$GitTrainingContent = "C:\Training\Git\GitTrainingContent"
 
 #region GitRepos
 
@@ -70,6 +53,20 @@ $RohiniGitHub = "https://github.com/RohiniSharma11"
 $ChristopherGitHub = "https://github.com/chrhodes"
 
 # END HILIGHT
+
+#endregion
+
+#region DO THIS ONE TIME ONLY
+
+################################################################
+# Clone the Training materials.  Only need to do this once
+################################################################
+
+$ChristopherGitHub = "https://github.com/chrhodes"
+
+cd $TrainingRootFolder
+git clone $ChristopherGitHub/GitTraining.git
+git clone $ChristopherGitHub/GitTrainingContent.git
 
 #endregion
 
@@ -571,6 +568,13 @@ git config --local --unset user.name
 # Remove a section
 
 git config --local -remove-section user
+
+#region Git Aliases
+
+git config --local --edit
+git config alias.st status
+
+#endregion
 
 <#**************************************************************
     Quick preview of cloning remote repos
