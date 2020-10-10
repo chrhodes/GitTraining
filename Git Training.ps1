@@ -578,6 +578,31 @@ git config --local --edit
 
 git config --global alias.cma "commit --all -m"
 git config --global alias.st "status --short --branch"
+git config --global alias.co "checkout"
+
+# Some logging stuff that might be good in an alias
+
+git log
+git log --pretty=oneline
+git log --pretty='%h | %d %s (%cr) [%an]'
+
+# All placeholders listed at
+# http://git-scm.com/docs/pretty-formats
+
+git log --pretty=oneline
+git log --pretty='%Cred%h%Creset | %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C(cyan)[%an]%Creset'
+
+git log --pretty='%C(red bold)%h%Creset | %C(yellow bold)%d%Creset %s %C(green bold)(%cr)%Creset %C(cyan bold)[%an]%Creset' --graph
+
+git config --global alias.lg "log --pretty='%C(red bold)%h%Creset | %C(yellow bold)%d%Creset %s %C(green bold)(%cr)%Creset %C(cyan bold)[%an]%Creset' --graph"
+
+# Some diff stuff
+
+git diff
+
+git diff --patience
+
+git diff --word-diff
 
 #endregion
 
