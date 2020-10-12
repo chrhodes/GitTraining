@@ -74,6 +74,7 @@ git clone $ChristopherGitHub/GitTrainingContent.git
 #endregion
 
 ################################################################
+#
 # Need to load supporting functions before starting to work.
 #
 # These help display info in the Git Repo and the Working Area
@@ -156,7 +157,7 @@ git config -l --show-origin --show-scope
 #git help <command>
 #git help <command> -v
 
-#NB - Be really careful as git help command launches browser and locks folder 
+#NB - Be careful as git help command launches browser and locks folder 
 
 #endregion
 
@@ -204,11 +205,17 @@ git log
 
 git count-objects
 
+#endregion
+
+#region Commands to use with git
+
 # Introduce posh-git Prompt
 
 # Clone this Repo
 
-https://github.com/dahlbyk/posh-git
+cd $TrainingRootFolder
+
+git close https://github.com/dahlbyk/posh-git
 cd .\posh-git
 .\install.ps1
 
@@ -295,13 +302,18 @@ End Optional Extra Credit Section
 #
 # Covers these commands and concepts
 #
-#   git version
-#   git help
 #   git init
-#   git status
+#   git cat-file
+#   git status 
+#   git checkout
+#   git add
+#   git diff
 #   git log
-#   git branch
-#   git count-objects
+#   git tag
+#   
+# Remember that a most of the functions in Git Training Fuctions
+# use git commands.  Review the fuctions to ensure you are
+# aware of what is being called.
 #
 ################################################################
 
@@ -399,7 +411,7 @@ whatsUpGit
 # Ok, a lot just happened.  Let's see if we can understand it
 # Using our knowledge of object types
 
-Clear-Hos
+Clear-Host
 displayObjects commit
 displayObjects tree
 displayObjects blob
@@ -503,10 +515,15 @@ git log --patch
 #
 # Covers these commands and concepts
 #
-#    git config
+#   git config
 #
-#    git branch
-#    git merge
+#   git clone
+#   git branch
+#   git push
+#   git merge
+#   git remote
+#   git checkout
+#   git cherry-pick
 #
 ################################################################
 
@@ -520,12 +537,16 @@ git log --patch
    
 **************************************************************#>
 
+Clear-Host
+
 # Check if anything exists in environment
 
+get-childitem env:
 get-childitem env:*user*
 
 get-childitem env:*config*
 get-childitem env:*git*
+get-childitem env:HOME
 
 git config
 git config -l  # git config -list
@@ -555,7 +576,6 @@ git config --system user.name
 git config --global user.name
 git config --local user.name
 
-
 # Set a value
 
 git config --system user.name "Christopher Rhodes"
@@ -576,9 +596,25 @@ git config --local --edit
 git config alias.st status
 git config --local --edit
 
-git config --global alias.cma "commit --all -m"
+# Typically want alias at Global Scope
+
+git config --local --remove-section alias
+
+# Let's revist status
+
+git status
+git status --short
+git status --short --branch
+
+git config --global --unset alias.st
+
 git config --global alias.st "status --short --branch"
+
+git config --global alias.st
+git config --global --edit
+
 git config --global alias.co "checkout"
+git config --global alias.cma "commit --all -m"
 
 # Some logging stuff that might be good in an alias
 
@@ -589,7 +625,6 @@ git log --pretty='%h | %d %s (%cr) [%an]'
 # All placeholders listed at
 # http://git-scm.com/docs/pretty-formats
 
-git log --pretty=oneline
 git log --pretty='%Cred%h%Creset | %C(yellow)%d%Creset %s %Cgreen(%cr)%Creset %C(cyan)[%an]%Creset'
 
 git log --pretty='%C(red bold)%h%Creset | %C(yellow bold)%d%Creset %s %C(green bold)(%cr)%Creset %C(cyan bold)[%an]%Creset' --graph
@@ -770,21 +805,31 @@ createRepo Git102Repo
 
 New-Item -Path . -Name recipies.txt -ItemType "file" -Value "Breakfast
 Dinner"
+
 get-content .\recipies.txt
+
 git add .
+
 git commit -m "My Recipies"
+
 git branch Chef
+
 git checkout Chef
+
 New-Item -Path . -Name recipies.txt -ItemType "file" -Value "Breakfast
 Lunch
 Afternoon Tea
 Dinner
 Bedtime Snack" -Force
+
 get-content .\recipies.txt
+
 git add .\recipies.txt
+
 git commit -m "Master Chef Recipies"
 
 git checkout master
+
 get-content .\recipies.txt
 
 # This is considered a fast forward merge
@@ -851,6 +896,7 @@ get-content .\recipies.txt
 #
 # Covers these commands and concepts
 #
+#   git diff
 #
 ################################################################
 

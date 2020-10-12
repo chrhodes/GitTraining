@@ -43,7 +43,7 @@ function displayConfig()
 # Displays information on objects
 # Can limit by $blobType if passed, e.g. commit|tree|blob
 
-function displayBlobInfo([string] $sha1)
+function displaySha1Info([string] $sha1)
 {
     delimitmsg SHA1
     $sha1
