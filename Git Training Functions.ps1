@@ -98,7 +98,7 @@ function displayObjects ($blobType = "")
 
         foreach ($sha1 in $sha1Folders)
         {
-            displayBlobInfo $sha1
+            displaySha1Info $sha1
             ""
         }
     }
@@ -112,7 +112,7 @@ function displayObjects ($blobType = "")
 
             if($blobType -eq $objectType)
             {          
-                displayBlobInfo $sha1
+                displaySha1Info $sha1
                 ""
             }
         }

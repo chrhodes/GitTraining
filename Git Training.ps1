@@ -955,6 +955,9 @@ git log
 
 displayObjects commit
 
+git diff <commit> <commit>
+git diff --patience
+
 #endregion
 
 ################################################################
