@@ -22,7 +22,7 @@ git update-git-for-windows
 #region Configuration
 
 $TrainingRootFolder = "C:\Training\Git"
-#$TrainingRootFolder = "P:\GitHub\chrhodes"
+#$TrainingRootFolder = "P:\Git\chrhodes"
 #$TrainingRootFolder = "C:\vnc\git\chrhodes"
 
 # Hilight lines down to END HILIGHT and execute each time
@@ -515,7 +515,7 @@ git log --patch
 #
 # Covers these commands and concepts
 #
-#   git config
+#   git config (including aliases)
 #
 #   git clone
 #   git branch
