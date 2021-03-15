@@ -1,5 +1,7 @@
 # Ignore Folders until ready to commit
 
+cheat-sheet-bundle/
+
 # Ignore Zip Files
 *.zip
 
